@@ -1,8 +1,40 @@
+<div align="center">
+
+<img src="./flutter_refactoring_agent_hub.png" alt="Flutter Refactoring Agent by Devzign — code cleanup, reusable widgets, unified APIs, and maintainable architecture" width="100%"/>
+
 # Flutter Refactoring Agent
 
-A production-grade AI agent for Flutter codebase refactoring, dead code removal, reusable widget extraction, UI consistency, API standardization, performance optimization, and clean, maintainable code architecture.
+**Clean code. Reusable widgets. Safer refactoring.**
 
-Give it to an AI coding tool and it behaves like a careful senior engineer: it studies the project first, records a working baseline, plans its changes by risk, applies them in small verified steps, and hands back a full report of everything it did.
+A production-grade AI agent for Flutter and Dart, designed to improve your entire codebase while preserving intended behavior.
+
+[![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev/)
+[![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/)
+[![MIT License](https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge)](LICENSE)
+
+[![OpenAI Codex](https://img.shields.io/badge/OpenAI%20Codex-111827?style=for-the-badge&logo=openai&logoColor=white)](.agents/skills/flutter-refactorer/SKILL.md)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-D97757?style=for-the-badge&logo=anthropic&logoColor=white)](.claude/agents/flutter-refactorer.md)
+
+**[Get started](#installation) · [Explore features](#what-the-agent-does) · [Workflow](#how-it-works) · [Safety](#safety-model)**
+
+Built by [Devzign](https://github.com/Devzign) · Open source
+
+</div>
+
+---
+
+## At a glance
+
+| 🧹 Clean up | 🧩 Reuse | ⚡ Optimize |
+| :--- | :--- | :--- |
+| Remove proven dead code, unused assets, and duplicate logic. | Extract reusable Flutter widgets and shared API services. | Improve lifecycle handling, rebuild efficiency, and maintainability. |
+| **🛡️ Protect** | **🧪 Validate** | **📋 Report** |
+| Preserve business logic, API contracts, and existing UI/UX. | Establish a baseline and verify each change before moving on. | Review every change, risk, correction, and validation result. |
+
+> [!IMPORTANT]
+> Refactoring is not a rewrite. Establish a baseline, approve the plan, and validate changes before merging. No AI agent can guarantee zero regressions.
+
+---
 
 ## Contents
 
@@ -215,6 +247,9 @@ When the work is done, the agent delivers a report with these sections:
 
 ## Installation
 
+> [!TIP]
+> Choose the native definition for your coding tool. Install globally to reuse the agent across projects, or install locally to share it with your team.
+
 Choose the installation format for your coding tool. Both native definitions implement the same refactoring workflow.
 
 | Tool | Definition |
@@ -284,6 +319,9 @@ Paste the file's content into your tool's rules or instructions file (many tools
 Use the file's content as the system prompt.
 
 ## Usage
+
+> [!NOTE]
+> Start with an audit and plan before requesting application-code changes.
 
 **Before you start:** commit or stash your work, and make sure the project builds and its tests run. The agent relies on these to verify its changes.
 
