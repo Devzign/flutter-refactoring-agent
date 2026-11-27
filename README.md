@@ -215,7 +215,13 @@ When the work is done, the agent delivers a report with these sections:
 
 ## Installation
 
-The agent is a single markdown file: [`flutter-refactorer.md`](.claude/agents/flutter-refactorer.md).
+Choose the installation format for your coding tool. Both native definitions implement the same refactoring workflow.
+
+| Tool | Definition |
+| --- | --- |
+| Claude Code | [Flutter subagent](.claude/agents/flutter-refactorer.md) |
+| OpenAI Codex (ChatGPT coding agent) | [Flutter skill](.agents/skills/flutter-refactorer/SKILL.md) |
+| ChatGPT and other coding tools | Markdown instructions with workspace access |
 
 ### Claude Code
 
@@ -234,6 +240,40 @@ cp /path/to/flutter-refactorer.md ~/.claude/agents/
 ```
 
 See the [Claude Code documentation](https://docs.claude.com/en/docs/claude-code/overview) for current details on subagents.
+
+### OpenAI Codex (ChatGPT coding agent)
+
+Codex uses the native [Agent Skills format](https://learn.chatgpt.com/docs/build-skills). This repository includes a dedicated [`SKILL.md`](.agents/skills/flutter-refactorer/SKILL.md) with the same six-phase refactoring workflow and safeguards as the Claude Code agent.
+
+**Global installation (macOS/Linux):** Run the following command to make the skill available across your Flutter projects. Review the downloaded skill before invoking it. If you already have a customized copy at this path, back it up before updating.
+
+```bash
+mkdir -p ~/.agents/skills/flutter-refactorer
+curl -fL https://raw.githubusercontent.com/Devzign/flutter-refactoring-agent/main/.agents/skills/flutter-refactorer/SKILL.md \
+  -o ~/.agents/skills/flutter-refactorer/SKILL.md
+```
+
+**Project installation:** From the root of your Flutter project:
+
+```bash
+mkdir -p .agents/skills/flutter-refactorer
+curl -fL https://raw.githubusercontent.com/Devzign/flutter-refactoring-agent/main/.agents/skills/flutter-refactorer/SKILL.md \
+  -o .agents/skills/flutter-refactorer/SKILL.md
+```
+
+Open your Flutter project in Codex (desktop, CLI, or IDE extension). Select the skill from the skills picker or invoke it explicitly:
+
+```text
+$flutter-refactorer
+Run discovery, baseline validation, and analysis on this Flutter project.
+Present the refactoring plan only. Do not modify application code yet.
+```
+
+Restart Codex if the skill does not appear. For web/cloud coding sessions, include the project-local skill in the checked-out repository and explicitly ask Codex to read it if it is not discovered automatically. Existing project instructions in `AGENTS.md` should be preserved; do not replace them with this skill.
+
+### ChatGPT chat
+
+Attach or paste the [`SKILL.md`](.agents/skills/flutter-refactorer/SKILL.md) instructions along with the relevant project files and ask ChatGPT to follow the workflow. Actual edits, builds, Git operations, and tests require access to the codebase and appropriate execution tools. A normal chat alone does not install a local Codex skill.
 
 ### Other AI coding tools
 
@@ -266,7 +306,7 @@ Leave the high-risk items as recommendations.
 You can also limit the scope:
 
 ```
-Use the flutter-refactorer agent on the src/features/billing folder only.
+Use the flutter-refactorer agent on the lib/features/billing folder only.
 ```
 
 ```
@@ -275,7 +315,7 @@ Use the flutter-refactorer agent to unify API calling only. Skip everything else
 
 ## Customizing
 
-The file is plain text, so edit it to fit your team:
+Both definitions are plain text. Keep their shared workflow and safety rules synchronized when editing them to fit your team:
 
 - **Add your stack's commands** to Phase 5, for example `npm run build`, `npm run lint`, `npm test`.
 - **Add protected paths** to the hard rules, for example folders the agent must never touch.
